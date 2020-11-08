@@ -137,7 +137,6 @@ bool validar_senha(char senha[]){
         return true;
     else   
         return false;
-
 }
 
 char *substr(const char *origem,int inicio, int fim){
