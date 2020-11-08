@@ -8,17 +8,16 @@
 int main(){
 
     printf("Hello World\n");
-   long long int telefone=43991717399;
-   char t[15]="41991717399";
-    // printf("%s\n",substr(t,0,2));
-    // char ddd[3];
-    // strcpy(ddd,substr(t,0,2));
-    // printf("%s\n",ddd);
    
-   if(validar_telefone(433991717399))
-  // if(strcmp(ddd,"42")<0)
+    char t[30]="rafael7jf@hotmail.com.br";
+  //  char inicial[30];
+  //  strcpy(inicial,substr(t,18,24));
+   // printf("%s\n",inicial);
+    
+   
+ if(validar_senha("Rafael556"))
     printf("true\n");
-   else
+  else
     printf("false\n");
     
     system("PAUSE");
