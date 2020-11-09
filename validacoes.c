@@ -153,3 +153,110 @@ char *substr(const char *origem,int inicio, int fim){
 
     return destino-tamanho;  
 }
+
+void validacao_data_criacao(){
+    time_t segundos;
+    time(&segundos);
+    data_c=localtime(&segundos);
+
+    contas[n_contas].data_criacao.dia=data_c->tm_mday;
+    contas[n_contas].data_criacao.mes=data_c->tm_mon+1;
+    contas[n_contas].data_criacao.ano=data_c->tm_year+1900;
+}
+
+void validar(){
+    while(1){                                               //bloco de verificação do cpf     
+            puts("Digite seu cpf no formato nnn.nnn.nnn-nn");
+            scanf("%s",contas[n_contas].cliente.cpf);
+            fflush(stdin);
+            
+            if(validar_cpf(contas[n_contas].cliente.cpf))
+                break;
+            else{
+                puts("cpf invalido");
+                continue;
+            }         
+        }
+
+        while(1){                                               //bloco de verificação do telefone
+            puts("Digite seu telefone");
+            scanf("%lld",&contas[n_contas].cliente.telefone);
+            fflush(stdin);
+            
+            if(validar_telefone(contas[n_contas].cliente.telefone))
+                break;
+            else{
+                puts("telefone invalido");
+                continue;
+            }
+        }
+
+        while(1){                                               //bloco de verificação de email
+            puts("Digite seu email com final 'com.br'");
+            scanf("%s",contas[n_contas].cliente.email);
+            fflush(stdin);
+
+            if(validar_email(contas[n_contas].cliente.email))
+                break;
+            else{
+                puts("Email invalido");
+                continue;
+            }
+        }
+
+        while(1){                                               //bloco de verificação de data de nascimento
+            puts("Digite sua data de nascimento com formato: dd/mm/aaaa");
+            scanf("%d/%d/%d",&contas[n_contas].cliente.data_nascimento.dia,
+                &contas[n_contas].cliente.data_nascimento.mes,
+                &contas[n_contas].cliente.data_nascimento.ano);
+            fflush(stdin);
+            
+            if( !validar_dia(contas[n_contas].cliente.data_nascimento.dia) ){
+                puts("Dia invalido");
+                continue;
+            }
+            if(!validar_mes(contas[n_contas].cliente.data_nascimento.mes)){
+                puts("Mes invalido");
+                continue;
+            }
+            if(!validar_ano(contas[n_contas].cliente.data_nascimento.ano)){
+                puts("Ano invalido");
+                continue;
+            }
+            break;   
+        }
+        while(1){                                               //bloco de verificacao de senha
+            puts("Crie uma senha de 6 a 10 digitos com letras maiusculas, minusculas e numeros");
+            scanf("%s",contas[n_contas].senha);
+
+            if(validar_senha)
+                break;
+            else{
+                puts("Senha invalida");
+                continue;
+            }
+        }
+}
+void validacao_data(){
+
+}
+
+void validacao_cpf(){
+
+}
+
+void validacao_telefone(){
+
+}
+
+void validacao_email(){
+
+}
+
+void validacao_senha(){
+
+}
+
+bool validar_pagamento(int num_conta,char senha[]){
+
+}
