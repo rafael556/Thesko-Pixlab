@@ -237,25 +237,6 @@ void validar(){
             }
         }
 }
-void validacao_data(){
-
-}
-
-void validacao_cpf(){
-
-}
-
-void validacao_telefone(){
-
-}
-
-void validacao_email(){
-
-}
-
-void validacao_senha(){
-
-}
 
 bool validar_pagamento(int num_conta,char senha[]){
 
