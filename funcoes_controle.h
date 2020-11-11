@@ -2,17 +2,15 @@
 #define FUNCOES_CONTROLE_H
 #include"validacoes.h"
 #include"estruturas.h"
+#include"funcoes_extrato.h"
 
-void criacao_conta();
-void deposito();  
-void print_contas();                            //pendente
+void criacao_conta();                           //testes
+void deposito();                                //testes
+void print_contas(int numconta);                //pendente
+void print_contas_ordenadas();                  //pendente
 void excluir_contas();//fudeu                   //pendente
 void transacao_pix();                           //pendente
 void informacao_transacao(conta x, conta y);    //pendente
-double extrato_t(int num_conta);
-void extrato();                                 //pendente
- bool existe_conta(int numconta);
- int busca_conta(int numconta);                 
 
  //buscar conta com pix
 

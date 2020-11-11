@@ -48,7 +48,7 @@ int main(){
             criacao_conta();
             break;
           case 2:
-            
+           // extrato();
             break;
           case 3:
             deposito();
@@ -63,6 +63,7 @@ int main(){
 
             break;
           case 7:
+            exit(0);
             break;
           default:
             break;

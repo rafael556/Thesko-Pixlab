@@ -154,7 +154,7 @@ char *substr(const char *origem,int inicio, int fim){
     return destino-tamanho;  
 }
 
-void validacao_data_criacao(){
+void validacao_data_criacao(){                              //valida a data de criação de conta em tempo real
     time_t segundos;
     time(&segundos);
     data_c=localtime(&segundos);
@@ -238,6 +238,6 @@ void validar(){
         }
 }
 
-bool validar_pagamento(int num_conta,char senha[]){
+bool validar_acesso(int num_conta,char senha[]){
 
 }

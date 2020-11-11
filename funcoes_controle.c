@@ -17,44 +17,46 @@ void criacao_conta(){
             contas[n_contas].saldo=0.00;
             contas[n_contas].limite=500.00;
             contas[n_contas].num_conta= numconta;
+            
+            print_contas(contas[n_contas].num_conta);           //printa a conta recém-criada
             n_contas++;
             numconta++;
-        }
-        //printar todas as informações da conta
-}
-int busca_conta(int numconta){                                  //retorna a posicao da conta no vetor de armazenamento
-    for(int i=0;i<100;i++){
-        if(contas[i].num_conta==numconta)
-            return i;
-    }
+            system("PAUSE");
+        }         
 }
 
-bool existe_conta(int numconta){                                //procura se existe uma conta com determinado numero de conta
-    for(int i=0;i<100;i++){
-        if(contas[i].num_conta==numconta)
-            return true;
-    }
-        return false;               
-}    
-
-void extrato(){
-
+void print_contas(int numconta){                               //printa informações relevantes da conta
+    int i;      //armazena a posicao da conta
+    
+    if(existe_conta(numconta))                                 ////////////// //cuidado para caso de erro
+        i=busca_conta(numconta);
+    
+    printf("Nome: %s",contas[i].cliente.nome);            //nome
+    printf("Numero da conta: %d\n",contas[i].num_conta);    //numero da conta
+    printf("CPF: %s\n",contas[i].cliente.cpf);            //cpf
+    printf("Telefone: %lld\n",contas[i].cliente.telefone);  //telefone
+    printf("Email: %s\n",contas[i].cliente.email);          //email
+    printf("Saldo: R$%.2lf\n",contas[i].saldo);             //saldo
+    printf("Data de criacao: %d/%d/%d\n"
+    ,contas[i].data_criacao.dia                             //data de criacao
+    ,contas[i].data_criacao.mes
+    ,contas[i].data_criacao.ano);                                
 }
 
-double extrato_t(int nconta){
-    if(existe_conta(nconta))
-        return contas[busca_conta(nconta)].saldo;
- }
+
+
+
 
 void deposito(){
     int nconta,             //numero da conta
     escolha=0;              //variavel de decisão nos menus                                
     double deposito=0;      //valor de depósito
 
-    while(1){
+    while(1){                                                           //verificacao da existencia da conta 
         puts("Digite o numero da conta a realizar o deposito");
         scanf("%d",&nconta);
         fflush(stdin);
+        
         if(existe_conta(nconta))
             break;
         else
@@ -64,9 +66,10 @@ void deposito(){
         }   
     }
 
-    while(1){
+    while(1){                                                           //entrada do valor de depósito
         puts("Digite o valor a ser depositado:");
         scanf("%lf",&deposito);
+        
         if( (contas[ busca_conta(nconta) ].saldo+deposito)>500 ){
             puts("o deposito excedeu o limite da conta");
             continue;
@@ -74,12 +77,11 @@ void deposito(){
         else{
             contas[ busca_conta(nconta) ].saldo = deposito;
             puts("deposito realizado com sucesso");
-        //    printf("%.2lf\n",contas[ busca_conta(nconta) ].saldo);
             break;
         }           
     }
 
-    while(1){                                       //bloco de extrato
+ /*   while(1){                                                       //bloco de extrato do depósito
         puts("Deseja retirar o extrato?");
         puts("1- Sim");
         puts("2- Nao");
@@ -90,23 +92,15 @@ void deposito(){
         switch(escolha){
             case 1:
                 printf("Conta %d\n",nconta);
-                printf("Saldo = R$%.2lf\n",extrato_t(nconta));
+                printf("Saldo = R$%.2lf\n",extrato_conta(nconta));
+                system("PAUSE");
                 break;
             case 2:
+                system("PAUSE");
                 break;
         }
-       puts("Deseja voltar para o menu?");
-        puts("1- Sim");
-        puts("2- Nao");
-        fflush(stdin);      //
-        scanf("%d",&escolha);
-        fflush(stdin);      //
-        if(escolha==1)
-            break;
-        else{
-            exit(0);
-        }                  
-    }  
+                           
+    }  */
 }
 
  
