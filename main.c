@@ -4,26 +4,17 @@
 #include"estruturas.h"
 #include"validacoes.c"
 #include"funcoes_controle.c"
+#include"funcoes_extrato.c"
 
 /*
 1
 Rafael Cruz
 016.553.436-29
-43991717399
+43993469439
 rafael7jf@hotmail.com.br
-15/01/2020
-2Rklmn
-1
-Rafael Cruz
-016.553.436-29
-43991717399
-rafael7jf@hotmail.com.br
-15/01/2020
-2Rklmn
-
-
-*/ 
-
+15/01/2000
+20Rlmn
+*/
 int main(){
   int decisao_1;
    
@@ -40,7 +31,7 @@ int main(){
       printf("\nDigite o numero da operacao requerida:");
       scanf("%d",&decisao_1);
       fflush(stdin);
-      // printf("\n%d\n",decisao_1);
+      
 
       switch (decisao_1)
       {
@@ -48,7 +39,7 @@ int main(){
             criacao_conta();
             break;
           case 2:
-           // extrato();
+            extrato();
             break;
           case 3:
             deposito();

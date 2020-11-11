@@ -12,7 +12,8 @@ void criacao_conta(){
 
         validar();
 
-        {                                                       //bloco de inicialização de contas                                                  
+        {   
+                                                               //bloco de inicialização de contas
             validacao_data_criacao();
             contas[n_contas].saldo=0.00;
             contas[n_contas].limite=500.00;
@@ -81,7 +82,7 @@ void deposito(){
         }           
     }
 
- /*   while(1){                                                       //bloco de extrato do depósito
+    while(1){                                                       //bloco de extrato do depósito
         puts("Deseja retirar o extrato?");
         puts("1- Sim");
         puts("2- Nao");
@@ -93,14 +94,12 @@ void deposito(){
             case 1:
                 printf("Conta %d\n",nconta);
                 printf("Saldo = R$%.2lf\n",extrato_conta(nconta));
-                system("PAUSE");
                 break;
             case 2:
-                system("PAUSE");
                 break;
         }
-                           
-    }  */
+        break;                      
+    }
+    system("PAUSE");  
 }
 
- 

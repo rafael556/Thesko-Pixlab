@@ -5,12 +5,15 @@
 #include"funcoes_extrato.h"
 
 void criacao_conta();                           //testes
-void deposito();                                //testes
+void deposito();       
+                         
 void print_contas(int numconta);                //pendente
-void print_contas_ordenadas();                  //pendente
-void excluir_contas();//fudeu                   //pendente
-void transacao_pix();                           //pendente
-void informacao_transacao(conta x, conta y);    //pendente
+void print_contas_ordenadas();   
+               
+void excluir_contas();//fudeu                   
+void transacao_pix();
+                           
+void informacao_transacao(conta x, conta y);    
 
  //buscar conta com pix
 

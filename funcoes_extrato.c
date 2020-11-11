@@ -115,7 +115,7 @@ double extrato_conta(int nconta){                                   //extrato a 
         return contas[busca_conta(nconta)].saldo;
  }
 
-bool existe_cpf(char cpf[]){
+bool existe_cpf(char cpf[]){                                        //procura se existe conta com o cpf registrado
     for(int i=0;i<100;i++){
         if(strcmp(contas[i].cliente.cpf,cpf)==0)
             return true;
@@ -123,18 +123,51 @@ bool existe_cpf(char cpf[]){
     return false;          
 }
 
-int busca_cpf(char cpf[]){
+int busca_cpf(char cpf[]){                                          //busca qual conta possui o cpf registrado
     for(int i=0;i<100;i++){
         if(strcmp(contas[i].cliente.cpf,cpf)==0)
             return i;
     }
 }
 
-double extrato_cpf(char cpf[]){
+double extrato_cpf(char cpf[]){                                     //retorna o extrato baseado no cpf registrado
     return contas[busca_cpf(cpf)].saldo; 
 }
-bool existe_email(char email[]);
-int busca_email(char email[]);
-bool existe_telefone(long long int telefone);
-int busca_telefone(long long int telefone);
 
+bool existe_email(char email[]){                                    //diz se existe uma conta com o email registrado
+    for(int i=0;i<100;i++){
+        if(strcmp(contas[i].cliente.email,email)==0)
+            return true;
+    }
+    return false;
+}
+
+int busca_email(char email[]){                                      //retorna a posicao da conta com o email registrado
+    for(int i=0;i<100;i++){
+        if(strcmp(contas[i].cliente.email,email)==0)
+            return i;
+    }
+}
+
+double extrato_email(char email[]){                                 //retorna o extrato baseado no email
+    return contas[busca_email(email)].saldo;
+}
+
+bool existe_telefone(long long int telefone){                       //verifica se existe conta associada a este telefone
+    for(int i=0;i<100;i++){
+        if(contas[i].cliente.telefone==telefone)
+            return true;
+    }
+    return false;
+}
+
+int busca_telefone(long long int telefone){                         //verifica qual conta está relacionada a este telefone
+    for(int i=0;i<100;i++){
+        if(contas[i].cliente.telefone==telefone)
+            return i;
+    }
+}
+
+double extrato_telefone(long long int telefone){                    //retorna o extrato da conta associada a este telefone
+    return contas[busca_telefone(telefone)].saldo;
+}

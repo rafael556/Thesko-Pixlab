@@ -11,9 +11,12 @@ bool validar_cpf(char cpf[]);                               //concluido
 bool validar_telefone(long long int telefone);              //concluido
 bool validar_email(char email[]);                           //concluido
 bool validar_senha(char senha[]);                           //concluido
-bool validar_acesso(int num_conta,char senha[]);     //pendente
-char *substr(const char *origem,int inicio, int fim);       //concluido
+bool validar_acesso(int num_conta,char senha[]);      //pendente
+
 void validacao_data_criacao();                              //concluido
+
 void validar();                                             //concluido
+
+char *substr(const char *origem,int inicio, int fim);       //concluido
 
 #endif
