@@ -7,7 +7,7 @@
 void criacao_conta();                           //testes
 void deposito();       
                          
-void print_contas(int numconta);                //pendente
+void print_contas();                //pendente
 void print_contas_ordenadas();   
                
 void excluir_contas();//fudeu                   

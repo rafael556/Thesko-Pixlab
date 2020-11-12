@@ -42,57 +42,57 @@ void extrato(){                                            //extrato geral
             {
             case 1:                         //caso cpf
                 while(1){
-                puts("Digite o numero do cpf registrado");
-                scanf("%s",cpf);
-                fflush(stdin);
+                    puts("Digite o numero do cpf registrado");
+                    scanf("%s",cpf);
+                    fflush(stdin);
         
-                if(existe_cpf(cpf))
-                    break;
-                else
-                {
-                    puts("cpf inexistente");
-                    continue;
-                }   
-            }
-            printf("Saldo = R$%.2lf\n",extrato_cpf(cpf));
-            system("PAUSE");
+                    if(existe_cpf(cpf))
+                        break;
+                    else
+                    {
+                        puts("cpf inexistente");
+                        continue;
+                    }   
+                }
+                printf("Saldo = R$%.2lf\n",extrato_cpf(cpf));
+                system("PAUSE");
                 break;
             case 2:                         //caso email
                 while(1){
-                puts("Digite o email registrado");
-                scanf("%s",email);
-                fflush(stdin);
+                    puts("Digite o email registrado");
+                    scanf("%s",email);
+                    fflush(stdin);
         
-                if(existe_email(email))
-                    break;
-                else
-                {
-                    puts("email inexistente");
-                    continue;
-                }   
-            }
-            printf("Saldo = R$%.2lf\n",extrato_email(email));
-            system("PAUSE");
+                    if(existe_email(email))
+                        break;
+                    else
+                    {
+                        puts("email inexistente");
+                        continue;
+                    }   
+                }
+                printf("Saldo = R$%.2lf\n",extrato_email(email));
+                system("PAUSE");
                 break;
             case 3:                         //caso telefone
                 while(1){
-                puts("Digite o numero do telefone registrado");
-                scanf("%lld",&telefone);
-                fflush(stdin);
+                    puts("Digite o numero do telefone registrado");
+                    scanf("%lld",&telefone);
+                    fflush(stdin);
         
-                if(existe_telefone(telefone))
-                    break;
-                else
-                {
-                    puts("telefone inexistente");
-                    continue;
-                }   
+                    if(existe_telefone(telefone))
+                        break;
+                    else
+                    {
+                        puts("telefone inexistente");
+                        continue;
+                    }   
             }
-            printf("Saldo = R$%.2lf\n",extrato_telefone(telefone));
-            system("PAUSE");
+                printf("Saldo = R$%.2lf\n",extrato_telefone(telefone));
+                system("PAUSE");
                 break;
             }
-            break;
+        break;
     }                           
 }
 
@@ -171,3 +171,19 @@ int busca_telefone(long long int telefone){                         //verifica q
 double extrato_telefone(long long int telefone){                    //retorna o extrato da conta associada a este telefone
     return contas[busca_telefone(telefone)].saldo;
 }
+
+bool existe_senha(char senha[]){
+    for(int i=0;i<100;i++){
+        if(strcmp(contas[i].senha,senha)==0)
+            return true;
+    }
+    return false;
+}
+
+int busca_senha(char senha[]){
+    for(int i=0;i<100;i++){
+        if(strcmp(contas[i].senha,senha)==0)
+            return i;
+    }
+}
+

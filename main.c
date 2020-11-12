@@ -14,6 +14,20 @@ Rafael Cruz
 rafael7jf@hotmail.com.br
 15/01/2000
 20Rlmn
+1
+Leila Cruz
+092.553.436-29
+43993469439
+rafael7jf@hotmail.com.br
+15/01/2000
+20Jklm
+1
+Joao Cruz
+092.543.436-29
+43993469439                     //testar pagamento email e telefone pendente
+rafael7jf@hotmail.com.br
+15/01/2000
+20KLmn
 */
 int main(){
   int decisao_1;
@@ -45,10 +59,10 @@ int main(){
             deposito();
             break;
           case 4:
-
+            print_contas_ordenadas();
             break;
           case 5:
-
+            transacao_pix();
             break;
           case 6:
 
