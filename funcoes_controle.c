@@ -143,16 +143,174 @@ void print_contas_ordenadas(){                      //printa todas as contas em 
 void transacao_pix(){                                           
     int escolha;
     int nconta;
-    int i=0;    //posicao da conta emissora
-    int j=0;    //posicao da conta receptora
     char email[50];
     char cpf[20];
     char senha[11];
     long long int telefone;
     double pagamento;
                             
-            while(1){                                               //login
-                puts("Digite o numero da conta para acesso");
+    while(1){                                               //login
+        puts("Digite o numero da conta para acesso");
+        scanf("%d",&nconta);
+        fflush(stdin);
+        
+        if(existe_conta(nconta))
+            break;
+        else{
+            puts("conta inexistente");
+            continue;
+        }   
+    }
+    while(1){                               //verificacao de senha 
+        puts("Digite a senha de acesso");
+        scanf("%s",senha);
+        fflush(stdin);
+
+        if(existe_senha(senha)){
+            if(busca_conta(nconta)==busca_senha(senha))
+                break;
+            else{
+                puts("Senha incorreta");
+                continue;
+            }
+        }   
+        else{
+            puts("Senha incorreta");
+            continue;
+        }
+    }
+    
+    puts("Escolha a chave pix desejada para o pagamento");          //extrato pelas chaves pix
+    puts("1- CPF");
+    puts("2- email");
+    puts("3- telefone");
+    scanf("%d",&escolha);
+    fflush(stdin);
+
+    switch (escolha){
+        case 1:                         //caso cpf
+            while(1){
+                puts("Digite o numero do cpf desejado");
+                scanf("%s",cpf);
+                fflush(stdin);
+        
+                if(existe_cpf(cpf))
+                    break;
+                else{
+                    puts("cpf inexistente");
+                    continue;
+                }   
+            }
+            validar_pagamento(&pagamento,nconta);
+
+            contas[busca_conta(nconta)].saldo-=pagamento;
+            contas[busca_cpf(cpf)].saldo+=pagamento;
+    
+            printf("\nNome: %s",contas[busca_conta(nconta)].cliente.nome);            //nome
+            printf("Numero da conta: %d\n",contas[busca_conta(nconta)].num_conta);    //numero da conta
+            printf("CPF: %s\n",contas[busca_conta(nconta)].cliente.cpf);            //cpf
+            printf("Telefone: %lld\n",contas[busca_conta(nconta)].cliente.telefone);  //telefone
+            printf("Email: %s\n",contas[busca_conta(nconta)].cliente.email);          //email
+            printf("Saldo: R$%.2lf\n\n",contas[busca_conta(nconta)].saldo);             //saldo
+                
+            printf("Nome: %s",contas[busca_cpf(cpf)].cliente.nome);            //nome
+            printf("Numero da conta: %d\n",contas[busca_cpf(cpf)].num_conta);    //numero da conta
+            printf("CPF: %s\n",contas[busca_cpf(cpf)].cliente.cpf);            //cpf
+            printf("Telefone: %lld\n",contas[busca_cpf(cpf)].cliente.telefone);  //telefone
+            printf("Email: %s\n",contas[busca_cpf(cpf)].cliente.email);          //email
+            printf("Saldo: R$%.2lf\n",contas[busca_cpf(cpf)].saldo);             //saldo
+            system("PAUSE");
+            break;
+
+        case 2:                         //caso email
+            while(1){
+                puts("Digite o email desejado");
+                scanf("%s",email);
+                fflush(stdin);
+        
+                if(existe_email(email))
+                    break;
+                else{ 
+                    puts("email inexistente");
+                    continue;
+                }   
+            }
+            validar_pagamento(&pagamento,nconta);
+
+            contas[busca_conta(nconta)].saldo-=pagamento;
+            contas[busca_email(email)].saldo+=pagamento;
+    
+            printf("\nNome: %s",contas[busca_conta(nconta)].cliente.nome);            //nome
+            printf("Numero da conta: %d\n",contas[busca_conta(nconta)].num_conta);    //numero da conta
+            printf("CPF: %s\n",contas[busca_conta(nconta)].cliente.cpf);            //cpf
+            printf("Telefone: %lld\n",contas[busca_conta(nconta)].cliente.telefone);  //telefone
+            printf("Email: %s\n",contas[busca_conta(nconta)].cliente.email);          //email
+            printf("Saldo: R$%.2lf\n\n",contas[busca_conta(nconta)].saldo);             //saldo
+                
+            printf("Nome: %s",contas[busca_email(email)].cliente.nome);            //nome
+            printf("Numero da conta: %d\n",contas[busca_email(email)].num_conta);    //numero da conta
+            printf("CPF: %s\n",contas[busca_email(email)].cliente.cpf);            //cpf
+            printf("Telefone: %lld\n",contas[busca_email(email)].cliente.telefone);  //telefone
+            printf("Email: %s\n",contas[busca_email(email)].cliente.email);          //email
+            printf("Saldo: R$%.2lf\n",contas[busca_email(email)].saldo);             //saldo
+                
+            system("PAUSE");
+            break;
+        case 3:                         //caso telefone
+            while(1){
+                puts("Digite o numero do telefone registrado");
+                scanf("%lld",&telefone);
+                fflush(stdin);
+        
+                if(existe_telefone(telefone))
+                    break;
+                else{
+                    puts("telefone inexistente");
+                    continue;
+                }   
+            }
+            validar_pagamento(&pagamento,nconta);
+
+            contas[busca_conta(nconta)].saldo-=pagamento;
+            contas[busca_telefone(telefone)].saldo+=pagamento;
+    
+            printf("\nNome: %s",contas[busca_conta(nconta)].cliente.nome);            //nome
+            printf("Numero da conta: %d\n",contas[busca_conta(nconta)].num_conta);    //numero da conta
+            printf("CPF: %s\n",contas[busca_conta(nconta)].cliente.cpf);            //cpf
+            printf("Telefone: %lld\n",contas[busca_conta(nconta)].cliente.telefone);  //telefone
+            printf("Email: %s\n",contas[busca_conta(nconta)].cliente.email);          //email
+            printf("Saldo: R$%.2lf\n\n",contas[busca_conta(nconta)].saldo);             //saldo
+                
+            printf("Nome: %s",contas[busca_telefone(telefone)].cliente.nome);            //nome
+            printf("Numero da conta: %d\n",contas[busca_telefone(telefone)].num_conta);    //numero da conta
+            printf("CPF: %s\n",contas[busca_telefone(telefone)].cliente.cpf);            //cpf
+            printf("Telefone: %lld\n",contas[busca_telefone(telefone)].cliente.telefone);  //telefone
+            printf("Email: %s\n",contas[busca_telefone(telefone)].cliente.email);          //email
+            printf("Saldo: R$%.2lf\n",contas[busca_telefone(telefone)].saldo);             //saldo
+
+            system("PAUSE");
+            break;
+    }
+}
+
+void excluir_contas(){
+    int escolha;
+    int nconta;
+    long long int telefone;
+    char email[50];
+    char cpf[20];
+    conta aux;
+
+
+    puts("Procurar por numero da conta ou chaves pix?");
+    puts("1- Numero da conta");
+    puts("2- Chaves pix");
+    scanf("%d",&escolha);
+
+    switch(escolha){
+        case 1:                             
+            while(1){
+                puts("Digite o numero da conta a ser excluida");
                 scanf("%d",&nconta);
                 fflush(stdin);
         
@@ -164,25 +322,22 @@ void transacao_pix(){
                     continue;
                 }   
             }
-            while(1){                               //verificacao de senha 
-                puts("Digite a senha de acesso");
-                scanf("%s",senha);
-                fflush(stdin);
-
-                if(existe_senha(senha)){
-                    if(busca_conta(nconta)==busca_senha(senha))
-                        break;
-                    else{
-                    puts("Senha incorreta");
+            for(int i = busca_conta(nconta);i<n_contas;i++){
+                if(busca_conta(nconta)==n_contas-1){
+                    contas[i]=aux;
+                    break;
+                } 
+                if(i==busca_conta(nconta))
                     continue;
-                    }
-                }   
-                else{
-                    puts("Senha incorreta");
-                    continue;
+                contas[i-1]=contas[i];
+                if(i==n_contas-1)
+                    contas[i]=aux;
                 }
-            }
-            puts("Escolha a chave pix desejada para o pagamento");          //extrato pelas chaves pix
+            --n_contas;
+            puts("Conta excluida com sucesso");
+            system("PAUSE");
+            break;
+        case 2:                             
             puts("1- CPF");
             puts("2- email");
             puts("3- telefone");
@@ -191,9 +346,9 @@ void transacao_pix(){
 
             switch (escolha)
             {
-            case 1:                         //caso cpf
+            case 1:                         
                 while(1){
-                    puts("Digite o numero do cpf desejado");
+                    puts("Digite o numero do cpf registrado");
                     scanf("%s",cpf);
                     fflush(stdin);
         
@@ -205,43 +360,24 @@ void transacao_pix(){
                         continue;
                     }   
                 }
-                while(1){                   //verificação de pagamento
-                    puts("Digite o valor do pagamento");
-                    scanf("%lf",&pagamento);
-                    fflush(stdin);
-                    if(pagamento<=extrato_conta(nconta)){
-                        puts("pagamento aprovado");
-                        break;
-                    }
-                    else{
-                        puts("Valor invalido sem fundos disponiveis");
-                        continue;
-                    }        
+                for(int i = busca_cpf(cpf);i<n_contas;i++){
+                        if(busca_cpf(cpf)==n_contas-1){
+                            contas[i]=aux;
+                            break;
+                        } 
+                        if(i==busca_cpf(cpf))
+                            continue;
+                        contas[i-1]=contas[i];
+                        if(i==n_contas-1)
+                            contas[i]=aux;
                 }
-                i=busca_conta(nconta);
-                j=busca_cpf(cpf);
-
-                contas[i].saldo-=pagamento;
-                contas[j].saldo+=pagamento;
-    
-                printf("\nNome: %s",contas[i].cliente.nome);            //nome
-                printf("Numero da conta: %d\n",contas[i].num_conta);    //numero da conta
-                printf("CPF: %s\n",contas[i].cliente.cpf);            //cpf
-                printf("Telefone: %lld\n",contas[i].cliente.telefone);  //telefone
-                printf("Email: %s\n",contas[i].cliente.email);          //email
-                printf("Saldo: R$%.2lf\n\n",contas[i].saldo);             //saldo
-                
-                printf("Nome: %s",contas[j].cliente.nome);            //nome
-                printf("Numero da conta: %d\n",contas[j].num_conta);    //numero da conta
-                printf("CPF: %s\n",contas[j].cliente.cpf);            //cpf
-                printf("Telefone: %lld\n",contas[j].cliente.telefone);  //telefone
-                printf("Email: %s\n",contas[j].cliente.email);          //email
-                printf("Saldo: R$%.2lf\n",contas[j].saldo);             //saldo
+                --n_contas;
+                puts("Conta excluida com sucesso");
                 system("PAUSE");
                 break;
-            case 2:                         //caso email
+            case 2:                         
                 while(1){
-                    puts("Digite o email desejado");
+                    puts("Digite o email registrado");
                     scanf("%s",email);
                     fflush(stdin);
         
@@ -253,42 +389,22 @@ void transacao_pix(){
                         continue;
                     }   
                 }
-                while(1){                   //verificação de pagamento
-                    puts("Digite o valor do pagamento");
-                    scanf("%lf",&pagamento);
-                    fflush(stdin);
-                    if(pagamento<=extrato_conta(nconta)){
-                        puts("pagamento aprovado");
-                        break;
-                    }
-                    else{
-                        puts("Valor invalido sem fundos disponiveis");
-                        continue;
-                    }        
+                for(int i = busca_email(email);i<n_contas;i++){
+                        if(busca_email(email)==n_contas-1){
+                            contas[i]=aux;
+                            break;
+                        } 
+                        if(i==busca_email(email))
+                            continue;
+                        contas[i-1]=contas[i];
+                        if(i==n_contas-1)
+                            contas[i]=aux;
                 }
-                i=busca_conta(nconta);
-                j=busca_email(email);
-
-                contas[i].saldo-=pagamento;
-                contas[j].saldo+=pagamento;
-    
-                printf("\nNome: %s",contas[i].cliente.nome);            //nome
-                printf("Numero da conta: %d\n",contas[i].num_conta);    //numero da conta
-                printf("CPF: %s\n",contas[i].cliente.cpf);            //cpf
-                printf("Telefone: %lld\n",contas[i].cliente.telefone);  //telefone
-                printf("Email: %s\n",contas[i].cliente.email);          //email
-                printf("Saldo: R$%.2lf\n\n",contas[i].saldo);             //saldo
-                
-                printf("Nome: %s",contas[j].cliente.nome);            //nome
-                printf("Numero da conta: %d\n",contas[j].num_conta);    //numero da conta
-                printf("CPF: %s\n",contas[j].cliente.cpf);            //cpf
-                printf("Telefone: %lld\n",contas[j].cliente.telefone);  //telefone
-                printf("Email: %s\n",contas[j].cliente.email);          //email
-                printf("Saldo: R$%.2lf\n",contas[j].saldo);             //saldo
-                
+                --n_contas;
+                puts("Conta excluida com sucesso");
                 system("PAUSE");
                 break;
-            case 3:                         //caso telefone
+            case 3:                         
                 while(1){
                     puts("Digite o numero do telefone registrado");
                     scanf("%lld",&telefone);
@@ -301,44 +417,23 @@ void transacao_pix(){
                         puts("telefone inexistente");
                         continue;
                     }   
+            }
+                for(int i = busca_telefone(telefone);i<n_contas;i++){
+                        if(busca_telefone(telefone)==n_contas-1){
+                            contas[i]=aux;
+                            break;
+                        } 
+                        if(i==busca_telefone(telefone))
+                            continue;
+                        contas[i-1]=contas[i];
+                        if(i==n_contas-1)
+                            contas[i]=aux;
                 }
-                while(1){                   //verificação de pagamento
-                    puts("Digite o valor do pagamento");
-                    scanf("%lf",&pagamento);
-                    fflush(stdin);
-                    if(pagamento<=extrato_conta(nconta)){
-                        puts("pagamento aprovado");
-                        break;
-                    }
-                    else{
-                        puts("Valor invalido sem fundos disponiveis");
-                        continue;
-                    }        
-                }
-                i=busca_conta(nconta);
-                j=busca_telefone(telefone);
-
-                contas[i].saldo-=pagamento;
-                contas[j].saldo+=pagamento;
-    
-                printf("\nNome: %s",contas[i].cliente.nome);            //nome
-                printf("Numero da conta: %d\n",contas[i].num_conta);    //numero da conta
-                printf("CPF: %s\n",contas[i].cliente.cpf);            //cpf
-                printf("Telefone: %lld\n",contas[i].cliente.telefone);  //telefone
-                printf("Email: %s\n",contas[i].cliente.email);          //email
-                printf("Saldo: R$%.2lf\n\n",contas[i].saldo);             //saldo
-                
-                printf("Nome: %s",contas[j].cliente.nome);            //nome
-                printf("Numero da conta: %d\n",contas[j].num_conta);    //numero da conta
-                printf("CPF: %s\n",contas[j].cliente.cpf);            //cpf
-                printf("Telefone: %lld\n",contas[j].cliente.telefone);  //telefone
-                printf("Email: %s\n",contas[j].cliente.email);          //email
-                printf("Saldo: R$%.2lf\n",contas[j].saldo);             //saldo
-
+                --n_contas;
+                puts("Conta excluida com sucesso");
                 system("PAUSE");
                 break;
             }
-        
-                               
-
+        break;
+    } 
 }

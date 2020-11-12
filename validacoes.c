@@ -232,7 +232,7 @@ void validar(){
         puts("Crie uma senha de 6 a 10 digitos com letras maiusculas, minusculas e numeros");
         scanf("%s",contas[n_contas].senha);
 
-        if(validar_senha)
+        if(validar_senha(contas[n_contas].senha))
             break;
         else{
             puts("Senha invalida");
@@ -241,6 +241,22 @@ void validar(){
     }
 }
 
-bool validar_acesso(int num_conta,char senha[]){
-
+void validar_pagamento(double *pagamento,int nconta){
+    while(1){
+        double pag;
+                    
+        puts("Digite o valor do pagamento");
+        scanf("%lf",&pag);
+        fflush(stdin);
+                    
+        if(*pagamento<=extrato_conta(nconta)){
+            puts("pagamento aprovado");
+            *pagamento=pag;
+            break;
+        }
+        else{
+            puts("Valor invalido sem fundos disponiveis");
+            continue;
+        }        
+    }
 }

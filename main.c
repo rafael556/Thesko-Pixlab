@@ -17,17 +17,24 @@ rafael7jf@hotmail.com.br
 1
 Leila Cruz
 092.553.436-29
-43993469439
-rafael7jf@hotmail.com.br
+43993469457
+leilinhacc@hotmail.com.br
 15/01/2000
 20Jklm
 1
 Joao Cruz
 092.543.436-29
-43993469439                     //testar pagamento email e telefone pendente
-rafael7jf@hotmail.com.br
+43993469499                     
+joaokf@hotmail.com.br
 15/01/2000
 20KLmn
+1
+Revolta Cruz
+092.543.433-29
+43993469999                     
+revolta@hotmail.com.br
+15/01/2000
+20KJmn
 */
 int main(){
   int decisao_1;
@@ -65,7 +72,7 @@ int main(){
             transacao_pix();
             break;
           case 6:
-
+            excluir_contas();
             break;
           case 7:
             exit(0);

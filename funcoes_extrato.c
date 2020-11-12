@@ -96,16 +96,16 @@ void extrato(){                                            //extrato geral
     }                           
 }
 
-int busca_conta(int numconta){                          //retorna a posicao da conta no vetor de armazenamento
+int busca_conta(int nconta){                          //retorna a posicao da conta no vetor de armazenamento
     for(int i=0;i<100;i++){
-        if(contas[i].num_conta==numconta)
+        if(contas[i].num_conta==nconta)
             return i;
     }
 }
 
-bool existe_conta(int numconta){                        //procura se existe uma conta com determinado numero de conta
+bool existe_conta(int nconta){                        //procura se existe uma conta com determinado numero de conta
     for(int i=0;i<100;i++){
-        if(contas[i].num_conta==numconta)
+        if(contas[i].num_conta==nconta)
             return true;
     }
     return false;               
