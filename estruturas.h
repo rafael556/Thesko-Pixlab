@@ -1,6 +1,11 @@
-#ifndef ESTRUTURAS_H
+/*------------------------
+Nome: Rafael Cruz Costa
+RA: 2266261
+Turma: N11A
+-------------------------*/
+#ifndef ESTRUTURAS_H            
 #define ESTRUTURAS_H
-#include<time.h>
+#include<time.h>                //biblioteca com funções de tempo
 
 typedef struct{                 //estrutura para datas
     int dia;
@@ -25,9 +30,10 @@ typedef struct{                 //estrutura das contas
     data data_criacao;
 }conta;
 
-conta contas[100];      //estrutura declarada como variavel global
-int n_contas=0;         //controle da quantidade de contas para criação e exclusão das mesmas
-int numconta=100;       //numero padrão para definição dos numeros das contas
-struct tm *data_c;      //estrutura de tempo para data de criação
+//VARIÁVEIS GLOBAIS
+conta contas[100];          //estrutura declarada como variavel global
+int n_contas=0;             //controle da quantidade de contas para criação e exclusão das mesmas
+int numconta=100;           //numero padrão para definição dos numeros das contas
+struct tm *data_c;          //estrutura de tempo para data de criação
 
 #endif

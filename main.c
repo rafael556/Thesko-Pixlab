@@ -1,47 +1,23 @@
-#include<stdio.h>
-#include<stdlib.h>
-#include<windows.h>
-#include"estruturas.h"
-#include"validacoes.c"
-#include"funcoes_controle.c"
-#include"funcoes_extrato.c"
+/*------------------------
+Nome: Rafael Cruz Costa
+RA: 2266261
+Turma: N11A
+-------------------------*/
 
-/*
-1
-Rafael Cruz
-016.553.436-29
-43993469439
-rafael7jf@hotmail.com.br
-15/01/2000
-20Rlmn
-1
-Leila Cruz
-092.553.436-29
-43993469457
-leilinhacc@hotmail.com.br
-15/01/2000
-20Jklm
-1
-Joao Cruz
-092.543.436-29
-43993469499                     
-joaokf@hotmail.com.br
-15/01/2000
-20KLmn
-1
-Revolta Cruz
-092.543.433-29
-43993469999                     
-revolta@hotmail.com.br
-15/01/2000
-20KJmn
-*/
+#include<stdio.h>               
+#include<stdlib.h>
+#include<windows.h>             
+#include"estruturas.h"          
+#include"validacoes.c"          
+#include"funcoes_controle.c"    
+#include"funcoes_extrato.c"     
+
 int main(){
-  int decisao_1;
+  int decisao;                //variável de controle para o menu principal
    
     puts("Bem-Vindo ao sistema Pix\n");
     
-    while(decisao_1!=7){
+    while(decisao!=7){
       puts("1- Criar nova conta");
       puts("2- Consultar extrato de conta");
       puts("3- Depositar em conta");
@@ -50,37 +26,37 @@ int main(){
       puts("6- excluir conta");
       puts("7- sair");
       printf("\nDigite o numero da operacao requerida:");
-      scanf("%d",&decisao_1);
+      scanf("%d", &decisao);
       fflush(stdin);
       
 
-      switch (decisao_1)
+      switch (decisao)
       {
           case 1:
-            criacao_conta();
+            criacao_conta();          //comanda a entrada de dados para criação de contas
             break;
           case 2:
-            extrato();
-            break;
+            extrato();                //busca conta ou chave pix e mostra seu saldo
+            break;                
           case 3:
-            deposito();
+            deposito();               //busca conta e realiza o depósito na mesma
             break;
           case 4:
-            print_contas_ordenadas();
+            print_contas_ordenadas(); //printa em ordem alfabetica todas as contas registradas
             break;
           case 5:
-            transacao_pix();
+            transacao_pix();          //realiza transferencia entre contas através das chaves pix
             break;
           case 6:
-            excluir_contas();
+            excluir_contas();         //exclui uma conta anteriormente registrada
             break;
           case 7:
-            exit(0);
+            exit(0);                  //encerra o programa
             break;
           default:
             break;
       }
-      system("cls");
+      system("cls");                  //limpa a tela
     }
     system("PAUSE");
     return 0;
