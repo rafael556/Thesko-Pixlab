@@ -4,7 +4,7 @@ RA: 2266261
 Turma: N11A
 -------------------------*/
 
-#include"funcoes_controle.h"
+#include "funcoes_controle.h"
 
 /*-------------------------------
 Função: criacao_conta
@@ -15,27 +15,24 @@ e validação de dados para a criação de contas
 ---------------------------------*/
 void criacao_conta(){
     puts("Para prosseguir com o processo irei precisar de alguns dados");
+                                                   
+    puts("Digite seu nome:");                           //bloco de entrada do nome
+    fgets(contas[n_contas].cliente.nome, 100, stdin);
+    fflush(stdin);
 
-        {                                                       //bloco de entrada do nome
-            puts("Digite seu nome:");
-            fgets(contas[n_contas].cliente.nome, 100, stdin);
-            fflush(stdin);
-        }
+    validar();                                          //valida cpf, email, senha, telefone e data de nascimento
 
-        validar();                  //valida cpf, email, senha, telefone e data de nascimento
-
-        {                           //bloco de inicialização de valores pré-definidos
-                                                               
-            validacao_data_criacao();
-            contas[n_contas].saldo = 0.00;
-            contas[n_contas].limite = 500.00;
-            contas[n_contas].num_conta = numconta;
-            
-            print_contas();         //printa a conta recém-criada
-            n_contas++;             //incrementa o numero de contas registradas
-            numconta++;             //incrementa o numero padrão de conta
-            system("PAUSE");
-        }         
+                                                                              
+    validacao_data_criacao();
+    contas[n_contas].saldo = 0.00;                      //bloco de inicialização de valores pré-definidos 
+    contas[n_contas].limite = 500.00;
+    contas[n_contas].num_conta = numconta;
+    
+    print_contas();                                     //printa a conta recém-criada
+    n_contas++;                                         //incrementa o numero de contas registradas
+    numconta++;                                         //incrementa o numero padrão de conta
+    system("PAUSE");
+         
 }
 
 /*-------------------------------
@@ -70,9 +67,9 @@ Descrição: submenu principal que posicao conta
 ou chave pix, deposita e depois mostra o saldo
 ---------------------------------*/
 void deposito(){
-    int nconta;             //numero da conta
-    int escolha=0;          //variavel de decisão nos menus                                
-    double deposito=0;      //valor de depósito
+    int nconta;                 //numero da conta
+    int escolha = 0;            //variavel de decisão nos menus                                
+    double deposito = 0;        //valor de depósito
 
     while(1){                                                           //verificacao da existencia da conta 
         puts("Digite o numero da conta a realizar o deposito");
@@ -96,7 +93,7 @@ void deposito(){
             continue;
         }
         else{
-            contas[posicao_conta(nconta)].saldo = deposito;
+            contas[posicao_conta(nconta)].saldo += deposito;
             puts("deposito realizado com sucesso");
             break;
         }           
@@ -106,7 +103,7 @@ void deposito(){
         puts("Deseja ver o saldo?");
         puts("1- Sim");
         puts("2- Nao");
-        fflush(stdin);      //
+        fflush(stdin);
         scanf("%d", &escolha);
         fflush(stdin);      
 
@@ -160,9 +157,9 @@ void print_contas_ordenadas(){                      //printa todas as contas em 
         }
     }
     for(int i = 0; i < n_contas; i++){                          //printa as contas ordenadas
-        printf("Numero da conta: %d\n", ordem[i].num_conta);
-        printf("CPF: %s\n", ordem[i].cliente.cpf);
         printf("Nome: %s", ordem[i].cliente.nome);
+        printf("CPF: %s\n", ordem[i].cliente.cpf);
+        printf("Numero da conta: %d\n", ordem[i].num_conta);
         printf("Saldo: R$%.2lf\n\n", ordem[i].saldo);
     }
     system("PAUSE");
@@ -241,16 +238,15 @@ void transacao_pix(){
             while(1){
                 validar_pagamento(&pagamento, nconta);               //verifica o valor do pagamento e se é válido
 
-                contas[posicao_conta(nconta)].saldo -= pagamento;
-                contas[posicao_cpf(cpf)].saldo += pagamento;
-
-                if(contas[posicao_cpf(cpf)].saldo > 500){            //verifica se supera o limite de credito da conta
-                    puts("Valor supera limite de credito da conta");
+                if(contas[posicao_cpf(cpf)].saldo + pagamento > 500){            //verifica se supera o limite de credito da conta
+                    puts("Valor supera o limite de credito da conta");
                     continue;
                 }
+                contas[posicao_conta(nconta)].saldo -= pagamento;
+                contas[posicao_cpf(cpf)].saldo += pagamento;
+                break;
             }
             
-    
             printf("\nNome: %s", contas[posicao_conta(nconta)].cliente.nome);             //nome
             printf("Numero da conta: %d\n", contas[posicao_conta(nconta)].num_conta);     //numero da conta
             printf("CPF: %s\n", contas[posicao_conta(nconta)].cliente.cpf);               //cpf
@@ -284,14 +280,13 @@ void transacao_pix(){
             while(1){
                 validar_pagamento(&pagamento, nconta);          //verifica o valor do pagamento e se é válido
 
-                contas[posicao_conta(nconta)].saldo -= pagamento;
-                contas[posicao_email(email)].saldo += pagamento;
-
-                if(contas[posicao_email(email)].saldo > 500){   //verifica se supera o limite de credito da conta 
-                    puts("Valor supera limite de credito da conta");
+                if(contas[posicao_email(email)].saldo + pagamento > 500){   //verifica se supera o limite de credito da conta 
+                    puts("Valor supera o limite de credito da conta");
                     continue;
                 }
-                    
+                contas[posicao_conta(nconta)].saldo -= pagamento;
+                contas[posicao_email(email)].saldo += pagamento;
+                break;    
             }
             
             printf("\nNome: %s", contas[posicao_conta(nconta)].cliente.nome);             //nome
@@ -326,16 +321,15 @@ void transacao_pix(){
             while(1){
                 validar_pagamento(&pagamento, nconta);              //verifica o valor do pagamento e se é válido
 
-                contas[posicao_conta(nconta)].saldo -= pagamento;
-                contas[posicao_telefone(telefone)].saldo += pagamento;
-
-                if(contas[posicao_telefone(telefone)].saldo > 500){ //verifica se supera o limite de credito
-                    puts("Valor supera limite de credito da conta");
+                if(contas[posicao_telefone(telefone)].saldo + pagamento > 500){ //verifica se supera o limite de credito
+                    puts("Valor supera o limite de credito da conta");
                     continue;
                 }
+                contas[posicao_conta(nconta)].saldo -= pagamento;
+                contas[posicao_telefone(telefone)].saldo += pagamento;
+                break;
             }
             
-    
             printf("\nNome: %s", contas[posicao_conta(nconta)].cliente.nome);                   //nome
             printf("Numero da conta: %d\n", contas[posicao_conta(nconta)].num_conta);           //numero da conta
             printf("CPF: %s\n", contas[posicao_conta(nconta)].cliente.cpf);                     //cpf
@@ -374,7 +368,8 @@ void excluir_contas(){
     puts("Procurar por numero da conta ou chaves pix?");
     puts("1- Numero da conta");
     puts("2- Chaves pix");
-    scanf("%d",&escolha);
+    scanf("%d", &escolha);
+    fflush(stdin);
 
     switch(escolha){
         case 1:                                                     //excluir a partir do numero da conta           
@@ -510,6 +505,6 @@ void excluir_contas(){
                     system("PAUSE");
                     break;
             }
-        break;
+            break;
     } 
 }

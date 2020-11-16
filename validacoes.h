@@ -6,10 +6,10 @@ Turma: N11A
 
 #ifndef VALIDACOES_H
 #define VALIDACOES_H
-#include<stdbool.h>
-#include<ctype.h>
-#include<string.h>
-#include"funcoes_controle.h"
+#include <stdbool.h>
+#include <ctype.h>
+#include <string.h>
+#include "funcoes_controle.h"
 
 /*-------------------------------
 Função: validar_dia
@@ -47,6 +47,15 @@ Descrição: verifica se cpf é válido
 bool validar_cpf(char cpf[]);
 
 /*-------------------------------
+Função: duplicata_cpf
+Parâmetros: cpf - string de cpf que será analisado
+Parâmetros: posicao - inteiro da posição do cpf em contas
+Retorno: verdadeiro ou falso
+Descrição: verifica se existe duplicata de cpf em contas
+---------------------------------*/
+bool duplicata_cpf(char cpf[], int posicao);
+
+/*-------------------------------
 Função: validar_telefone
 Parâmetros: telefone - numero de telefone que será analisado
 Retorno: verdadeiro ou falso
@@ -55,12 +64,30 @@ Descrição: verifica se telefone é válido
 bool validar_telefone(long long int telefone);
 
 /*-------------------------------
+Função: duplicata_telefone
+Parâmetros: telefone - inteiro de telefone que será analisado
+Parâmetros: posicao - inteiro da posição do telefone em contas
+Retorno: verdadeiro ou falso
+Descrição: verifica se existe duplicata de telefone em contas
+---------------------------------*/
+bool duplicata_telefone(long long int telefone, int posicao);
+
+/*-------------------------------
 Função: validar_email
 Parâmetros: email - string de email que será analisado
 Retorno: verdadeiro ou falso
 Descrição: verifica se email é válido
 ---------------------------------*/ 
 bool validar_email(char email[]);
+
+/*-------------------------------
+Função: duplicata_email
+Parâmetros: email - string de email que será analisado
+Parâmetros: posicao - inteiro da posição do email em contas
+Retorno: verdadeiro ou falso
+Descrição: verifica se existe duplicata de email em contas
+---------------------------------*/
+bool duplicata_email(char email[], int posicao);
 
 /*-------------------------------
 Função: validar_senha
@@ -108,6 +135,6 @@ Retorno: substring de origem delimitada por inicio e fim
 Descrição: retorna substring de uma string origem
 delimitada por inicio e fim
 ---------------------------------*/ 
-char *substr(const char *origem, int inicio, int fim);       
+char *substr(char *origem, int inicio, int fim);       
 
 #endif

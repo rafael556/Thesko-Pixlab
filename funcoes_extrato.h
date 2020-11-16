@@ -6,7 +6,7 @@ Turma: N11A
 
 #ifndef FUNCOES_EXTRATO_H
 #define FUNCOES_EXTRATO_H
-#include"funcoes_controle.h"
+#include "funcoes_controle.h"
 
 /*-------------------------------
 Função: extrato

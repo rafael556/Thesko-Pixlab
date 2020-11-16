@@ -56,7 +56,7 @@ Descrição: verifica se cpf é válido
 ---------------------------------*/
 bool validar_cpf(char cpf[]){                                   
     
-    if(existe_cpf(cpf))                     //evita duplicata
+    if( duplicata_cpf(cpf, posicao_cpf(cpf) ) )                     //evita duplicata
         return false;
 
     if(strlen(cpf) != 14)                     //verifica se o cpf tem o tamanho certo
@@ -68,7 +68,7 @@ bool validar_cpf(char cpf[]){
                 return false;
         }   
         if( i == 3 || i == 7 ){             //verifica se os pontos estão corretos
-            if( cpf[i] != 46 ) 
+            if(cpf[i] != 46) 
                 return false;
         }
         if(i == 11){                          //verifica se o traço está correto
@@ -76,7 +76,7 @@ bool validar_cpf(char cpf[]){
                 return false;
         }   
     }
-        return true;    
+    return true;    
 }
 
 /*-------------------------------
@@ -87,20 +87,20 @@ Descrição: verifica se telefone é válido
 ---------------------------------*/ 
 bool validar_telefone(long long int telefone){               
 
-    char vtelefone[11];                             //string de telefone
-    char ddd[3];                                    //substring de vtelefone composto pelo DDD
+    char vtelefone[11];                                                 //string de telefone
+    char ddd[3];                                                        //substring de vtelefone composto pelo DDD
     
-    if(existe_telefone(telefone))                   //evita duplicata
+    if( duplicata_telefone(telefone, posicao_telefone(telefone) ) )     //evita duplicata
         return false;
 
-    sprintf(vtelefone, "%lld", telefone);             //transforma o numero em string
+    sprintf(vtelefone, "%lld", telefone);                               //transforma o numero em string
 
-    strcpy(ddd, substr(vtelefone, 0, 2));              //gera substring de DDD
+    strcpy(ddd, substr(vtelefone, 0, 2));                               //gera substring de DDD
     
-    if(strlen(vtelefone) != 11)                       //verifica se o tamanho está correto
+    if(strlen(vtelefone) != 11)                                         //verifica se o tamanho está correto
         return false;
 
-    if(strcmp(ddd, "41") < 0 || strcmp(ddd, "44") > 0)    //verifica se o DDD está correto  
+    if(strcmp(ddd, "41") < 0 || strcmp(ddd, "44") > 0)                  //verifica se o DDD está correto  
         return false;
 
     return true;
@@ -114,23 +114,23 @@ Descrição: verifica se email é válido
 ---------------------------------*/
 bool validar_email(char email[]){                       
                            
-    char inicial[30];                   //substring da parte anterior ao arroba
-    char final[30];                     //substring da parte após o arroba e antes da finalizacao
-    char finalizacao[10] = "com.br";      //string de comparação para a finalização
+    char inicial[30];                       //substring da parte anterior ao arroba
+    char final[30];                         //substring da parte após o arroba e antes da finalizacao
+    char finalizacao[10] = "com.br";        //string de comparação para a finalização
     char finalizacao_teste[10];
-    int tamanho_total = strlen(email);    //tamanho total de email
-    int tamanho_inicial;                //tamanho da parte inicial
-    int tamanho_final;                  //tamanho da parte final
-    int posicao_arroba;                 //posição de arroba
-    int posicao_ponto;                  //posição do primeiro ponto
-    int num_arroba = 0;                   //variável de controle de quantidade de arrobas
-    int num_pontos = 0;                   //variável de controle de quantidade de pontos
+    int tamanho_total = strlen(email);      //tamanho total de email
+    int tamanho_inicial;                    //tamanho da parte inicial
+    int tamanho_final;                      //tamanho da parte final
+    int posicao_arroba;                     //posição de arroba
+    int posicao_ponto;                      //posição do primeiro ponto
+    int num_arroba = 0;                     //variável de controle de quantidade de arrobas
+    int num_pontos = 0;                     //variável de controle de quantidade de pontos
 
-    if(existe_email(email))             //evita duplicata
+    if( duplicata_email(email, posicao_email(email) ) )             //evita duplicata
         return false;
     
     for(int i = 0; i < tamanho_total; i++){
-        if(email[i] == '@'){              //verifica a existencia,quantidade e posição de arroba
+        if(email[i] == '@'){                //verifica a existencia,quantidade e posição de arroba
             posicao_arroba = i;
             num_arroba++;
         }
@@ -157,18 +157,22 @@ bool validar_email(char email[]){
         return false;
 
     for(int i = 0; i < tamanho_inicial; i++){
-        if(isdigit(inicial[i]))         //verifica a existencia de numeros
+        if( isdigit(inicial[i]) )       //verifica a existencia de numeros
             continue;
-        
+        if( ispunct (inicial[i]) )      //verifica a existencia de simbolos   
+            continue;    
         if(islower(inicial[i]) == 0)    //verifica se as letras são minusculas
-            return false;            
+            return false; 
+                   
     }
     for(int i = 0; i < tamanho_final; i++){
-        if(isdigit(final[i]))           //verifica a existencia de numeros
+        if( isdigit(final[i]) )           //verifica a existencia de numeros
             continue;
-
+        if( ispunct (final[i]) )      //verifica a existencia de simbolos   
+            continue;
         if(islower(final[i]) == 0)      //verifica se as letras são minusculas
-            return false;     
+            return false;
+             
     }
     return true;
 }
@@ -181,22 +185,22 @@ Descrição: verifica se senha é válido
 ---------------------------------*/
 bool validar_senha(char senha[]){                       
 
-    int maiuscula=0,            //conta a quantidade de letras maiusculas   
-    int minuscula=0,            //conta a quantidade de letras minusculas
-    int numero=0;               //conta a quantidade de numeros
-    int tamanho=strlen(senha);  //conta o tamanho da string senha
+    int maiuscula = 0;            //conta a quantidade de letras maiusculas   
+    int minuscula = 0;            //conta a quantidade de letras minusculas
+    int numero = 0;               //conta a quantidade de numeros
+    int tamanho = strlen(senha);  //conta o tamanho da string senha
 
-    if(tamanho<6 || tamanho>10) //verifica se o tamanho está correto
+    if(tamanho < 6 || tamanho > 10) //verifica se o tamanho está correto
         return false;
-    for(int i=0;i<tamanho;i++){
-        if(isupper(senha[i]))   //verifica a existencia de letras maiusculas
+    for(int i = 0; i < tamanho; i++){
+        if( isupper(senha[i]) )   //verifica a existencia de letras maiusculas
             maiuscula++;
-        if(islower(senha[i]))   //verifica a existencia de letras minusculas
+        if( islower(senha[i]) )   //verifica a existencia de letras minusculas
             minuscula++;
-        if(isdigit(senha[i]))   //verifica a existencia de numeros
+        if( isdigit(senha[i]) )   //verifica a existencia de numeros
             numero++;
     }
-    if(maiuscula>0 && minuscula>0 && numero>0)
+    if(maiuscula > 0 && minuscula > 0 && numero > 0)
         return true;
     else   
         return false;
@@ -211,19 +215,18 @@ Retorno: substring de origem delimitada por inicio e fim
 Descrição: retorna substring de uma string origem
 delimitada por inicio e fim
 ---------------------------------*/ 
-char *substr(const char *origem,int inicio, int fim){       
+char *substr(char *origem, int inicio, int fim){       
     
     int tamanho = fim - inicio;
-
     char *destino = malloc(sizeof(char) * (tamanho+1));     //aloca dinamicamente a string destino
 
-    for(int i=inicio; i<fim && (*(origem+i) != '\0');i++){
-        *destino= *(origem+i);              
+    for(int i = inicio; i < fim && (*(origem + i) != '\0'); i++){
+        *destino = *(origem + i);                           
         destino++;
     }
     *destino = '\0';
 
-    return destino-tamanho;  
+    return destino - tamanho;  
 }
 
 /*-------------------------------
@@ -293,20 +296,20 @@ void validar(){
 
     while(1){                                               //bloco de verificação de data de nascimento
         puts("Digite sua data de nascimento com formato: dd/mm/aaaa");
-        scanf("%d/%d/%d",&contas[n_contas].cliente.data_nascimento.dia,
-            &contas[n_contas].cliente.data_nascimento.mes,
-            &contas[n_contas].cliente.data_nascimento.ano);
+        scanf("%d/%d/%d", &contas[n_contas].cliente.data_nascimento.dia,
+        &contas[n_contas].cliente.data_nascimento.mes,
+        &contas[n_contas].cliente.data_nascimento.ano);
         fflush(stdin);
             
         if( !validar_dia(contas[n_contas].cliente.data_nascimento.dia) ){
             puts("Dia invalido");
             continue;
         }
-        if(!validar_mes(contas[n_contas].cliente.data_nascimento.mes)){
+        if( !validar_mes(contas[n_contas].cliente.data_nascimento.mes) ){
             puts("Mes invalido");
             continue;
         }
-        if(!validar_ano(contas[n_contas].cliente.data_nascimento.ano)){
+        if( !validar_ano(contas[n_contas].cliente.data_nascimento.ano) ){
             puts("Ano invalido");
             continue;
         }
@@ -317,7 +320,7 @@ void validar(){
         puts("Crie uma senha de 6 a 10 digitos com letras maiusculas, minusculas e numeros");
         scanf("%s", contas[n_contas].senha);
 
-        if(validar_senha(contas[n_contas].senha))
+        if( validar_senha(contas[n_contas].senha) )
             break;
         else{
             puts("Senha invalida");
@@ -342,13 +345,88 @@ void validar_pagamento(double *pagamento, int nconta){
         scanf("%lf", &pag);
         fflush(stdin);
                     
-        if(*pagamento <= extrato_conta(nconta)){
+        if( pag <= extrato_conta(nconta) ){
             *pagamento = pag;
             break;
         }
         else{
             puts("Valor invalido sem fundos disponiveis");
-            continue;
+            *pagamento = 0;
+            break;
         }        
     }
+}
+
+/*-------------------------------
+Função: duplicata_cpf
+Parâmetros: cpf - string de cpf que será analisado
+Parâmetros: posicao - inteiro da posição do cpf em contas
+Retorno: verdadeiro ou falso
+Descrição: verifica se existe duplicata de cpf em contas
+---------------------------------*/
+bool duplicata_cpf(char cpf[], int posicao){                                        
+    for(int i = 0; i < 100; i++){
+        if(n_contas == 0)                           //ignora a primeira conta a ser criada
+            return false;
+        else
+            if(posicao == 0)
+            return true;
+
+        if(n_contas == posicao)                     //ignora as informações da criação corrente
+            return false;
+
+        if(strcmp(contas[i].cliente.cpf, cpf) == 0) //procura o cpf em contas
+            return true;
+    }
+    return false;          
+}
+
+/*-------------------------------
+Função: duplicata_telefone
+Parâmetros: telefone - inteiro de telefone que será analisado
+Parâmetros: posicao - inteiro da posição do telefone em contas
+Retorno: verdadeiro ou falso
+Descrição: verifica se existe duplicata de telefone em contas
+---------------------------------*/
+bool duplicata_telefone(long long int telefone, int posicao){                                        
+    for(int i = 0; i < 100; i++){
+        if(n_contas == 0){                          //ignora a primeira conta a ser criada
+            return false;
+        }
+        else{
+            if(posicao == 0)
+            return true;
+        }
+        if(n_contas == posicao)                     //ignora as informações da criação corrente
+            return false;
+        
+        if(contas[i].cliente.telefone == telefone)  //procura o telefone em contas
+            return true;
+    }
+    return false;          
+}
+
+/*-------------------------------
+Função: duplicata_email
+Parâmetros: email - string de email que será analisado
+Parâmetros: posicao - inteiro da posição do email em contas
+Retorno: verdadeiro ou falso
+Descrição: verifica se existe duplicata de email em contas
+---------------------------------*/
+bool duplicata_email(char email[], int posicao){                                        
+    for(int i = 0; i < 100; i++){
+        if(n_contas == 0){                              //ignora a primeira conta a ser criada
+            return false;
+        }
+        else{
+            if(posicao == 0)
+            return true;
+        }
+        if(n_contas == posicao)                         //ignora as informações da criação corrente
+            return false;
+        
+        if(strcmp(contas[i].cliente.email, email) == 0) //procura o email em contas
+            return true;
+    }
+    return false;          
 }

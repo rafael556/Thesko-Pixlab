@@ -4,7 +4,7 @@ RA: 2266261
 Turma: N11A
 -------------------------*/
 
-#include"funcoes_extrato.h"
+#include "funcoes_extrato.h"
 
 /*-------------------------------
 Função: extrato
@@ -17,7 +17,7 @@ void extrato(){
     int escolha;        //variável de controle de menus
     int nconta;
     char email[50];
-    int cpf[20];
+    char cpf[20];
     long long int telefone;
 
     puts("Deseja retirar o extrato com o numero da conta ou chaves pix?");  
@@ -33,7 +33,7 @@ void extrato(){
                 scanf("%d", &nconta);
                 fflush(stdin);
         
-                if(existe_conta(nconta))    //verifica a existencia da conta no registro
+                if( existe_conta(nconta) )    //verifica a existencia da conta no registro
                     break;
                 else
                 {
@@ -51,61 +51,58 @@ void extrato(){
             scanf("%d", &escolha);
             fflush(stdin);
 
-            switch (escolha)
-            {
-            case 1:                             //caso cpf
-                while(1){
-                    puts("Digite o numero do cpf registrado");
-                    scanf("%s", cpf);
-                    fflush(stdin);
-        
-                    if(existe_cpf(cpf))         //verifica se o cpf consta no registro de contas
-                        break;
-                    else
-                    {
-                        puts("cpf inexistente");
-                        continue;
-                    }   
-                }
-                printf("Saldo = R$%.2lf\n", extrato_cpf(cpf));
-                system("PAUSE");
-                break;
-            case 2:                             //caso email
-                while(1){
-                    puts("Digite o email registrado");
-                    scanf("%s", email);
-                    fflush(stdin);
-        
-                    if(existe_email(email))     //verifica se email existe no registro de contas
-                        break;
-                    else
-                    {
-                        puts("email inexistente");
-                        continue;
-                    }   
-                }
-                printf("Saldo = R$%.2lf\n",extrato_email(email));
-                system("PAUSE");
-                break;
-            case 3:                                 //caso telefone
-                while(1){
-                    puts("Digite o numero do telefone registrado");
-                    scanf("%lld", &telefone);
-                    fflush(stdin);
-        
-                    if(existe_telefone(telefone))   //verifica se telefone existe no registro de contas
-                        break;
-                    else
-                    {
-                        puts("telefone inexistente");
-                        continue;
-                    }   
-            }
+            switch (escolha){
+                case 1:                             //caso cpf
+                    while(1){
+                        puts("Digite o numero do cpf registrado");
+                        scanf("%s", cpf);
+                        fflush(stdin);
+            
+                        if(existe_cpf(cpf))         //verifica se o cpf consta no registro de contas
+                            break;
+                        else{
+                            puts("cpf inexistente");
+                            continue;
+                        }   
+                    }
+                    printf("Saldo = R$%.2lf\n", extrato_cpf(cpf));
+                    system("PAUSE");
+                    break;
+                case 2:                             //caso email
+                    while(1){
+                        puts("Digite o email registrado");
+                        scanf("%s", email);
+                        fflush(stdin);
+            
+                        if(existe_email(email))     //verifica se email existe no registro de contas
+                            break;
+                        else{
+                            puts("email inexistente");
+                            continue;
+                        }   
+                    }
+                    printf("Saldo = R$%.2lf\n", extrato_email(email));
+                    system("PAUSE");
+                    break;
+                case 3:                                 //caso telefone
+                    while(1){
+                        puts("Digite o numero do telefone registrado");
+                        scanf("%lld", &telefone);
+                        fflush(stdin);
+            
+                        if(existe_telefone(telefone))   //verifica se telefone existe no registro de contas
+                            break;
+                        else
+                        {
+                            puts("telefone inexistente");
+                            continue;
+                        }   
+                    }
                 printf("Saldo = R$%.2lf\n", extrato_telefone(telefone));
                 system("PAUSE");
                 break;
             }
-        break;
+            break;
     }                           
 }
 

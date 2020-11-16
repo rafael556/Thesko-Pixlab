@@ -1,0 +1,40 @@
+NOME: Rafael Cruz Costa
+RA: 2266261
+TURMA: N11A
+
+    O projeto é um sistema bancário simples com um menu principal de sete opções: Criação de contas; Consulta de extrato;  Depósito em conta; Mostrar todas as contas 
+ordenadas; Pagamento; Excluir conta e sair.
+    
+O projeto foi dividido em oito arquivos: "main" com o menu principal; "estruturas" com a definição das estruturas e variáveis globais; "Validacoes" com cabeçalho 
+e arquivo-fonte com todas as funções relacionadas a validação. "funcoes_controle" com cabeçalho e arquivo-fonte com todas as funções dos menus principais; 
+"funcoes_extrato" cabeçalho e arquivo-fonte possui toda a função de extrato, funções de teste de existencia e posição, além de ter originado as variações de submenu 
+para todas as outras funções com sistema de busca. Foi inteiramente feito no Visual Studio Code.
+    
+A criação de contas utiliza o array contas com espaço para registrar 100 contas diferentes, as variáveis globais n_contas, que é inicializado em zero e é incrementado 
+sempre que uma conta é totalmente validada e é decrementada quando uma conta é excluída, numconta que tem valor padrão de cem e sempre que uma nova conta é criada ele 
+incrementa. Para a criação de contas é utilizada uma única função para as entradas de dados e uma função booleana para cada informação a ser validada.
+    
+A consulta de extrato possui dois submenus, o primeiro verifica se a consulta será pelo número da conta ou pelas chaves pix e o segundo submenu para escolher entre as 
+chaves pix de cpf, email e telefone. Para efetuar a busca são utilizadas duas funções,  as funções de posição que são inteiras e retornam a posição daquela informação 
+no array contas, e as funções booleanas que aferem a existencia dessas informações em contas e por fim mostram na tela o saldo da conta especificada.
+    
+Depósito pede a numeração da conta para realizar o depósito e o valor, logo após é conferido se o valor ultrapassa o limite de crédito pré-estabelecido e logo após 
+tem um submenu que pergunta se é desejado ver o saldo da conta.
+    
+Ordenação das contas mostra na tela em ordem alfabética todas as contas utilizando a mesma lógica de ordenação crescente de um array e mostra o nome, número da conta, 
+cpf e saldo de cada conta.
+    
+Pagamento pede o número da conta a ser utilizada para o pagamento e faz uma validação de senha para continuar, logo após um submenu de chaves pix para realizar o 
+pagamento é utilizado e é requerido o valor do pagamento, o qual passar por uma função de validação que verifica se há saldo e logo após é conferido se o pagamento 
+iria superar o limite de crédito. Se não houver problemas com o pagamento, o mesmo é aprovado e é mostrado na tela as informações das contas envolvidas.
+    
+Exclusão de contas utiliza os submenus de consulta de extrato e por um sistema de substituição retira uma conta do array contas e o substitui pelos posteriores com a 
+ajuda de uma estrutura auxiliar.
+
+    A criação de contas trouxe dificuldades para controlar as posições do array e na validação do email, o qual foi resolvido utilizando variáveis globais e a criação 
+de uma função substring para manipular as partes do email. 
+    
+As funcionalidades foram implementadas e testadas em um teste de mesa prolongado, e todos os bugs encontrados foram corrigidos com a ajuda do depurador do Visual 
+Studio Code.
+
+
